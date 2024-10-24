@@ -46,6 +46,7 @@
     "lint": "ng lint"
   },
   "dependencies": {
+    "@angular/animations": "17.3.6",
     "@angular/common": "17.3.6",
     "@angular/compiler": "17.3.6",
     "@angular/core": "17.3.6",
@@ -55,6 +56,8 @@
     "@angular/platform-browser-dynamic": "17.3.6",
     "@angular/router": "17.3.6",
     "pg": "8.13.0",
+    "primeicons": "7.0.0",
+    "primeng": "17.18.11",
     "rxjs": "7.8.1",
     "tslib": "2.6.2",
     "zone.js": "0.14.4"

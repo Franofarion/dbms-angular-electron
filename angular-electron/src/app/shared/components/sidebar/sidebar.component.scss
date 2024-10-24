@@ -1,0 +1,19 @@
+.sidebar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.app-logo {
+    width: 75px;
+    height: auto;
+    align-self: center;
+}
+
+.app-title {
+    align-self: center;
+}
+ 
+.sidebar-content {
+    padding-top: 24px;
+}
