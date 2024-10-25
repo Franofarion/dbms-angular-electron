@@ -23,10 +23,12 @@ async function connectToPostgres(connectionArgs: ConnectionArgs) {
     await client.connect();
     console.log('Connected to PostgreSQL');
 
-    const res = await client.query('SELECT * FROM users');
+    const res = await client.query(
+      "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"
+    );
     await client.end();
 
-    console.log(res);
+    console.log(res.rows);
 
     return true;
   } catch (error) {
