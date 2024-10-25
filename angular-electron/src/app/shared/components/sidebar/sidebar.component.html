@@ -8,7 +8,12 @@
     <h3 class="app-title">DBMS Angular / Electron</h3>
 
     <div class="sidebar-content">
-      <p-button label="Add connection" icon="pi pi-plus" size="small" />
+      <p-button
+        label="Add connection"
+        icon="pi pi-plus"
+        size="small"
+        (onClick)="showConnectionDialog()"
+      />
     </div>
   </div>
 </p-sidebar>

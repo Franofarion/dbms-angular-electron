@@ -16,12 +16,15 @@ import { HomeModule } from './home/home.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from "./shared/components/sidebar/sidebar.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConnectionDialogComponent } from './shared/connection-dialog/connection-dialog.component';
 
 // AoT requires an exported function for factories
 const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -38,7 +41,8 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new Transl
             deps: [HttpClient]
         }
     }),
-    SidebarComponent
+    SidebarComponent,
+    ConnectionDialogComponent
 ],
   providers: [],
   bootstrap: [AppComponent]

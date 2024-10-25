@@ -1,1 +1,1 @@
-require('./connection.ts');
+require('./connection');
