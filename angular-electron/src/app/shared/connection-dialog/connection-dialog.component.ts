@@ -5,7 +5,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DialogService } from '../../core/services/dialog/dialog.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ElectronService } from '../../core/services';
+import { Connection } from '../../core/services/connections/connections';
+import { ConnectionsService } from '../../core/services/connections/connections.service';
 
 @Component({
   selector: 'app-connection-dialog',
@@ -25,7 +26,7 @@ export class ConnectionDialogComponent implements OnInit {
 
   constructor(
     private dialogService: DialogService,
-    private electronService: ElectronService
+    private connectionsService: ConnectionsService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class ConnectionDialogComponent implements OnInit {
     );
 
     this.formGroup = new FormGroup({
+      name: new FormControl<string | null>('Super Database'),
       host: new FormControl<string | null>('localhost'),
       port: new FormControl<string | null>('5432'),
       user: new FormControl<string | null>('user'),
@@ -47,14 +49,15 @@ export class ConnectionDialogComponent implements OnInit {
   }
 
   connect() {
-    console.log(this.formGroup?.getRawValue());
-    this.electronService.ipcRenderer
-      .invoke('CONNECTION', {
+    try {
+      const connection = {
         ...this.formGroup?.getRawValue(),
         port: Number(this.formGroup?.get('port')?.value),
-      })
-      .then((res) => {
-        console.log(res);
-      });
+      } as Connection;
+      this.connectionsService.addConnection(connection);
+      this.closeDialog();
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

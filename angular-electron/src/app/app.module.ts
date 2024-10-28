@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { SidebarModule } from "./sidebar/sidebar.module";
+
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,7 +16,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HomeModule } from './home/home.module';
 
 import { AppComponent } from './app.component';
-import { SidebarComponent } from "./shared/components/sidebar/sidebar.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConnectionDialogComponent } from './shared/connection-dialog/connection-dialog.component';
 
@@ -33,6 +34,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new Transl
     CoreModule,
     SharedModule,
     HomeModule,
+    SidebarModule,
     AppRoutingModule,
     TranslateModule.forRoot({
         loader: {
@@ -41,7 +43,6 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new Transl
             deps: [HttpClient]
         }
     }),
-    SidebarComponent,
     ConnectionDialogComponent
 ],
   providers: [],

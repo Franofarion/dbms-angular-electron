@@ -6,7 +6,7 @@ let win: BrowserWindow | null = null;
 const args = process.argv.slice(1),
   serve = args.some((val) => val === '--serve');
 
-require('./icp-handler/index');
+require('./ipc-handler/index');
 
 function createWindow(): BrowserWindow {
   const size = screen.getPrimaryDisplay().workAreaSize;

@@ -4,10 +4,20 @@
   [(visible)]="visible"
   [style]="{ width: '25rem' }"
 >
-  <span class="p-text-secondary block mb-5">Update your information.</span>
+  <span class="p-text-secondary block mb-5">Add a new connection</span>
   <div *ngIf="formGroup" [formGroup]="formGroup">
     <div class="flex align-items-center gap-3 mb-3">
-      <label for="host" class="font-semibold w-6rem">host</label>
+      <label for="name" class="font-semibold w-6rem">Name</label>
+      <input
+        pInputText
+        id="name"
+        class="flex-auto"
+        autocomplete="off"
+        formControlName="name"
+      />
+    </div>
+    <div class="flex align-items-center gap-3 mb-3">
+      <label for="host" class="font-semibold w-6rem">Host</label>
       <input
         pInputText
         id="host"
@@ -17,7 +27,7 @@
       />
     </div>
     <div class="flex align-items-center gap-3 mb-3">
-      <label for="port" class="font-semibold w-6rem">port</label>
+      <label for="port" class="font-semibold w-6rem">Port</label>
       <input
         pInputText
         id="port"
@@ -27,7 +37,7 @@
       />
     </div>
     <div class="flex align-items-center gap-3 mb-3">
-      <label for="database" class="font-semibold w-6rem">database</label>
+      <label for="database" class="font-semibold w-6rem">Database</label>
       <input
         pInputText
         id="database"
@@ -37,7 +47,7 @@
       />
     </div>
     <div class="flex align-items-center gap-3 mb-3">
-      <label for="user" class="font-semibold w-6rem">user</label>
+      <label for="user" class="font-semibold w-6rem">User</label>
       <input
         pInputText
         id="user"
@@ -47,7 +57,7 @@
       />
     </div>
     <div class="flex align-items-center gap-3 mb-3">
-      <label for="password" class="font-semibold w-6rem">password</label>
+      <label for="password" class="font-semibold w-6rem">Password</label>
       <input
         pInputText
         id="password"

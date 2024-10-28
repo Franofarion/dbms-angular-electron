@@ -1,5 +1,5 @@
 {
-  "name": "angular-electron",
+  "name": "dbms-angular-electron",
   "main": "dist/app/main.js",
   "private": true,
   "scripts": {

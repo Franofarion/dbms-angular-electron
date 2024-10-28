@@ -8,6 +8,16 @@
     <h3 class="app-title">DBMS Angular / Electron</h3>
 
     <div class="sidebar-content">
+      <!-- <app-connection-list></app-connection-list> -->
+      <div class="flex-auto md:flex md:align-items-start flex-column">
+        <p-tree
+          class="w-full"
+          [value]="connections"
+          loadingMode="icon"
+          (onNodeExpand)="onConnectionExpend($event)"
+        />
+      </div>
+
       <p-button
         label="Add connection"
         icon="pi pi-plus"
