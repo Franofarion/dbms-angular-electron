@@ -49,31 +49,80 @@ export class SidebarComponent implements OnInit {
     this.dialogService.openDialog();
   }
 
-  async onConnectionExpend(event: any) {
+  async onExpend(event: any) {
+    console.log(event.node);
+    if (event.node.parent && !event.node.children) {
+      return this.onTableExpend(event);
+    }
     if (!event.node.children) {
-      event.node.loading = true;
+      this.onConnectionExpend(event);
+    }
+  }
 
-      let _node = { ...event.node };
-      const index = this.connections.findIndex(
-        (conn) => conn.key === _node.key
+  async onConnectionExpend(event: any) {
+    event.node.loading = true;
+
+    let _node = { ...event.node };
+    const index = this.connections.findIndex((conn) => conn.key === _node.key);
+
+    try {
+      const tables = await this.tablesService.getTablesFromConnection(_node.id);
+
+      _node.children = tables.map((table) => ({
+        ...table,
+        icon: ICON_TABLE,
+        key: table.table_name,
+        label: table.table_name,
+        leaf: false,
+      }));
+
+      this.connections[index] = { ..._node, loading: false };
+    } catch (error) {
+      console.error(error);
+      this.connections[index] = { ..._node, loading: false };
+    }
+  }
+
+  async onTableExpend(event: any) {
+    event.node.loading = true;
+
+    let _node = { ...event.node };
+    const parentIndex = this.connections.findIndex(
+      (conn) => conn.key === _node.parent.key
+    );
+    const index = this.connections[parentIndex]?.children?.findIndex(
+      (conn) => conn.key === _node.key
+    );
+
+    try {
+      const tableDefinitions = await this.tablesService.getTableDefinition(
+        _node.parent.id,
+        _node.label
       );
 
-      try {
-        const tables = await this.tablesService.getTablesFromConnection(
-          _node.id
-        );
+      _node.children = tableDefinitions.map((tableDef) => ({
+        // icon: ICON_TABLE,
+        ...tableDef,
+        key: tableDef.column_name,
+        label: tableDef.column_name,
+      }));
 
-        _node.children = tables.map((table) => ({
-          ...table,
-          icon: ICON_TABLE,
-          key: table.table_name,
-          label: table.table_name,
-        }));
-
-        this.connections[index] = { ..._node, loading: false };
-      } catch (error) {
-        console.error(error);
-        this.connections[index] = { ..._node, loading: false };
+      if (this.connections[parentIndex]?.children) {
+        console.log(this.connections[parentIndex]);
+        // @ts-ignore
+        this.connections[parentIndex].children[index] = {
+          ..._node,
+          loading: false,
+        };
+      }
+    } catch (error) {
+      console.error(error);
+      if (this.connections[parentIndex]?.children) {
+        // @ts-ignore
+        this.connections[parentIndex].children[index] = {
+          ..._node,
+          loading: false,
+        };
       }
     }
   }

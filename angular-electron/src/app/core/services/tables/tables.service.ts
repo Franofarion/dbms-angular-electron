@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ElectronService } from '../electron/electron.service';
-import { Table } from './tables';
+import { Table, TableDefinition } from './tables';
 
 @Injectable({
   providedIn: 'root',
@@ -15,5 +15,17 @@ export class TablesService {
       connectionId
     );
     return tables;
+  }
+
+  async getTableDefinition(
+    connectionId: string,
+    tableName: string
+  ): Promise<TableDefinition[]> {
+    const tableDefinition = this.electronService.ipcRenderer.invoke(
+      'GET_TABLE_DEFINITION',
+      connectionId,
+      tableName
+    );
+    return tableDefinition;
   }
 }

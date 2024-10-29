@@ -1,19 +1,34 @@
 .sidebar-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .app-logo {
-    width: 75px;
-    height: auto;
-    align-self: center;
+  width: 75px;
+  height: auto;
+  align-self: center;
 }
 
 .app-title {
-    align-self: center;
+  align-self: center;
 }
- 
+
 .sidebar-content {
-    padding-top: 24px;
+  padding-top: 24px;
+}
+
+:host {
+  ::ng-deep {
+    .p-tree {
+      border: none;
+      padding: 0;
+    }
+    .p-treenode-content {
+      padding: 0;
+    }
+    // .p-treenode {
+    //   border-left: 1px solid #dee2e6;
+    // }
+  }
 }
